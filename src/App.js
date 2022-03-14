@@ -6,6 +6,20 @@ import { useEffect, useState } from "react";
 function App() {
   let [추천, 추천변경] = useState(0);
   let [toDo, setToDo] = useState("");
+  let [toDos,setToDos]=useState([]);
+  const onChange=(event)=>{
+    setToDo(event.target.value);
+  }
+  const onSubmit=(event)=>{
+    event.preventDefault();
+    if(toDo===""){
+      return;
+    }
+    
+    setToDos((currentArray)=>[toDo,...currentArray]);
+    setToDo("");
+  };
+  console.log(toDos);
   let [modal, setModal] = useState(true);
   useEffect(()=>{
     let timer=setTimeout(()=>{
@@ -13,31 +27,43 @@ function App() {
     },3000)
   })
   return (
-    <div className="App">
-      <div className="black-nav">
-        <p>영화 추천 블로그</p>
-      </div>
-      {modal===true?<Modal />:null}
-      <div>
-        <span
-          onClick={() => {
-            추천변경(추천++);
-          }}
-        >
-          추천
-        </span>{" "}
-        : {추천}
-        <button
-          onClick={() => {
-            추천변경(0);
-          }}
-        >
-          추천초기화
-        </button>
-      </div>
 
-      <Poster />
-    </div>
+
+    <div>
+      <div className="black-nav">
+         <p>영화 추천 블로그</p>
+       </div>
+      <h1>My To Dos ({toDos.length})</h1>
+      <form onSubmit={onSubmit}>
+      <input onChange={onChange} value={toDo} type="text" placeholder="Write Your to do "></input>
+      <button>Add To Do </button>
+      </form>
+      </div>
+    // <div className="App">
+    //   <div className="black-nav">
+    //     <p>영화 추천 블로그</p>
+    //   </div>
+    //   {modal===true?<Modal />:null}
+    //   <div>
+    //     <span
+    //       onClick={() => {
+    //         추천변경(추천++);
+    //       }}
+    //     >
+    //       추천
+    //     </span>{" "}
+    //     : {추천}
+    //     <button
+    //       onClick={() => {
+    //         추천변경(0);
+    //       }}
+    //     >
+    //       추천초기화
+    //     </button>
+    //   </div>
+
+    //   <Poster />
+    // </div>
   );
 }
 
