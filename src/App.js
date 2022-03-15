@@ -18,7 +18,7 @@ function App() {
     
     setToDos((currentArray)=>[toDo,...currentArray]);
     setToDo("");
-  };
+  };//
   console.log(toDos);
   let [modal, setModal] = useState(true);
   useEffect(()=>{
@@ -33,11 +33,13 @@ function App() {
       <div className="black-nav">
          <p>영화 추천 블로그</p>
        </div>
-      <h1>My To Dos ({toDos.length})</h1>
+      <h1>My To Dos {toDos.length>=1?toDos.length:null}</h1>
       <form onSubmit={onSubmit}>
       <input onChange={onChange} value={toDo} type="text" placeholder="Write Your to do "></input>
       <button>Add To Do </button>
       </form>
+      </hr>
+      {toDos.map()}
       </div>
     // <div className="App">
     //   <div className="black-nav">
